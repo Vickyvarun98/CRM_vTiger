@@ -20,8 +20,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import net.sourceforge.tess4j.Tesseract;
-
 public class WebDriverUtility {
 
 	// Implicitly wait
@@ -178,22 +176,6 @@ public class WebDriverUtility {
 		File src = ts.getScreenshotAs(OutputType.FILE);
 		File dest = new File(filePathWithName);
 		FileUtils.copyFile(src, dest);
-	}
-
-	// captcha
-	public String readAndEnterCaptcha(WebElement captchaImg) throws Throwable {
-		TakesScreenshot cimg = (TakesScreenshot) captchaImg;
-		File src = cimg.getScreenshotAs(OutputType.FILE);
-		File dest = new File("./CaptchaImg.png");
-		FileUtils.copyFile(src, dest);
-
-		Tesseract tess = new Tesseract();
-		tess.setDatapath("C:\\Users\\Rajani\\Downloads\\Tess4J-3.4.8-src\\Tess4J\\tessdata");
-		String capTxt = tess.doOCR(dest); // identifies the characters from image and converts to string
-		String captchaTxt = capTxt.replace(" ", "");
-		// sometimes there will be spaces in the captcha text which cannot be handled,
-		// so have to remove spaces
-		return captchaTxt;
 	}
 
 	// scroll to element
